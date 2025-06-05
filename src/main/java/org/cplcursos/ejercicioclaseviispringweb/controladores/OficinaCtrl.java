@@ -1,10 +1,13 @@
 package org.cplcursos.ejercicioclaseviispringweb.controladores;
 
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.OficinaDTOLista;
+import org.cplcursos.ejercicioclaseviispringweb.modelos.Oficina;
 import org.cplcursos.ejercicioclaseviispringweb.servicios.JardineriaSrvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
@@ -64,4 +67,18 @@ public class OficinaCtrl {
 
         return "vistaLista";
     }
+
+    @GetMapping("/form")
+    public String mostrarFormularioOficina(Model model) {
+        model.addAttribute("oficina", new Oficina());
+        return "formOfi"; // o como se llame tu vista .html
+    }
+
+    @PostMapping("/oficinas/guardar")
+    public String guardarOficina(@ModelAttribute Oficina oficina) {
+        //Aqui guardamos en caso de poder
+        return "vistaLista"; // Redirige a la lista o donde prefieras
+    }
+
+
 }

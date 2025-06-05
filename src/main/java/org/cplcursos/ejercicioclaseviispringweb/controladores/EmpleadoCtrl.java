@@ -2,10 +2,13 @@ package org.cplcursos.ejercicioclaseviispringweb.controladores;
 
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOLista;
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOSinCiudad;
+import org.cplcursos.ejercicioclaseviispringweb.modelos.Empleado;
 import org.cplcursos.ejercicioclaseviispringweb.servicios.JardineriaSrvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.LinkedHashMap;
@@ -74,9 +77,19 @@ public class EmpleadoCtrl {
         return "vistaLista";
     }
 
-    public void mostrarVentasPorEmpleado() {
-
+    @GetMapping("/form")
+    public String mostrarFormulario(Model model) {
+        model.addAttribute("empleado", new Empleado());
+        return "form"; // Ej. "formularioEmpleado"
     }
+
+    @PostMapping("/empleados/guardar")
+    public String guardarEmpleado(@ModelAttribute Empleado empleado) {
+        // Aquí llamas a tu servicio para guardar el empleado
+        //Aquí guardaría el empleado
+        return "vistaLista"; // o donde quieras redirigir
+    }
+
 
     private void imprimirEmpleado(EmpleadoDTOLista empleado) {
         System.out.printf("  - %s %s %s (%s) - %s%n",
