@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOLista;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
 @Setter
@@ -29,10 +26,5 @@ public class Empleado {
             return "Empleado [codigoEmpleado=" + codigoEmpleado + ", nombre=" + nombre + ", apellido1=" + apellido1 +
                     ", apellido2=" + apellido2 + "]";
         }
-
-        public EmpleadoDTOLista toDTO() {
-
-        }
-
 
 }

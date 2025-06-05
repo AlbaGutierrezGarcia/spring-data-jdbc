@@ -1,13 +1,16 @@
 package org.cplcursos.ejercicioclaseviispringweb.controladores;
 
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOLista;
+import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOSinCiudad;
 import org.cplcursos.ejercicioclaseviispringweb.servicios.JardineriaSrvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/empleados")
@@ -48,6 +51,26 @@ public class EmpleadoCtrl {
                 .collect(Collectors.groupingBy(EmpleadoDTOLista::getCiudadOficina)
                 );*/
 
+        return "vistaLista";
+    }
+
+    @GetMapping("/nociudad")
+    public String listarEmpleadosSinCiudad(Model modelo){
+        List<EmpleadoDTOSinCiudad> listaEmpleados = jardineriaSrvc.listarEmpleadoSinCiudad();
+        List<Map<String, Object>> filas = listaEmpleados.stream()
+                .map(e -> {
+                    Map<String, Object> map = new LinkedHashMap<>();
+                    map.put("codigo_empleado", e.codigoEmpleado());
+                    map.put("nombre", e.nombre());
+                    map.put("apellidos", e.apellidos());
+                    map.put("email", e.email());
+                    map.put("puesto", e.puesto());
+                    return map;
+                }).toList();
+
+        List<String> cabeceras = List.of("Código", "Nombre", "Apellidos", "Correo", "Puesto");
+        modelo.addAttribute("cabeceras", cabeceras);
+        modelo.addAttribute("filas", filas);
         return "vistaLista";
     }
 

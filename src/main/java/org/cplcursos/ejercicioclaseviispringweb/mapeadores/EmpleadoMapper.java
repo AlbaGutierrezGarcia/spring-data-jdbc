@@ -21,6 +21,5 @@ public class EmpleadoMapper {
         // necesitamos obtener la ciudad de su oficina
         empleDTO.setCiudadOficina(rs.getString("ciudad_oficina"));
         return empleDTO;
-
     }
 }
