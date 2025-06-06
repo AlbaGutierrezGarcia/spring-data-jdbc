@@ -6,11 +6,9 @@ import org.cplcursos.ejercicioclaseviispringweb.modelos.Empleado;
 import org.cplcursos.ejercicioclaseviispringweb.servicios.JardineriaSrvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,11 +81,28 @@ public class EmpleadoCtrl {
         return "form"; // Ej. "formularioEmpleado"
     }
 
-    @PostMapping("/empleados/guardar")
-    public String guardarEmpleado(@ModelAttribute Empleado empleado) {
+    //Esto nos muestra un empleado completando el formulario
+    @GetMapping("/form/nuevo")
+    public String cargarEmpleado(Model model) {
+        Empleado empleado = jardineriaSrvc.cargarEmpleado(7);
+        model.addAttribute("empleado", empleado);
+        return "form";
+    }
+
+    //Lo que tenemos entre corchete sera un valor que recogeremos a traves de la barra url
+    @GetMapping("/editar/{id}")
+    public String editarEmpleado(Model model, @PathVariable int id) {
+        model.addAttribute("empleado", jardineriaSrvc.cargarEmpleado(id));
+        return "form";
+    }
+
+    //Spring guarda automaticamente los campos que le llegan y asigna a la entidad que le pasemos que en este caso seria Empleados
+    @PostMapping("/guardar")
+    public String guardarEmpleado(@ModelAttribute Empleado empleado) throws SQLException {
         // Aquí llamas a tu servicio para guardar el empleado
-        //Aquí guardaría el empleado
-        return "vistaLista"; // o donde quieras redirigir
+        jardineriaSrvc.guardarEmpleado(empleado);
+
+        return "redirect:/empleados"; // o donde quieras redirigir
     }
 
 

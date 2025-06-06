@@ -33,11 +33,14 @@
         <main>
             <h2 class="text-center mb-4">Formulario de Empleado</h2>
 
-            <form th:action="@{/empleados/form}" th:object="${empleado}" method="post" class="row g-3">
-                <div class="col-md-4">
+            <form th:action="@{/empleados/guardar}" th:object="${empleado}" method="post" class="row g-3">
+
+                <!-- Mostrar el código solo si ya existe (editar), y como readonly -->
+                <div class="col-md-4" th:if="${empleado.codigoEmpleado != null}">
                     <label for="codigoEmpleado" class="form-label">Código</label>
-                    <input type="number" class="form-control" id="codigoEmpleado" th:field="*{codigoEmpleado}" required>
+                    <input type="number" class="form-control" id="codigoEmpleado" th:field="*{codigoEmpleado}" readonly>
                 </div>
+
                 <div class="col-md-4">
                     <label for="nombre" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>

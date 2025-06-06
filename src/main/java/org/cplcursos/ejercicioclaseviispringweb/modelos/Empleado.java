@@ -12,7 +12,7 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 public class Empleado {
         @Id
-        private int codigoEmpleado;
+        private Integer codigoEmpleado;
         private String nombre;
         private String apellido1;
         private String apellido2;

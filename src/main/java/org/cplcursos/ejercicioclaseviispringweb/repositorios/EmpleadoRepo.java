@@ -30,4 +30,7 @@ public interface EmpleadoRepo extends CrudRepository<Empleado, Integer>{
 
     List<Empleado> findAll();
 
+
+    Empleado findById(int id);
+
 }
