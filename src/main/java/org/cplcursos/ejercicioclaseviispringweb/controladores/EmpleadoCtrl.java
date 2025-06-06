@@ -2,10 +2,13 @@ package org.cplcursos.ejercicioclaseviispringweb.controladores;
 
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOLista;
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOSinCiudad;
+import org.cplcursos.ejercicioclaseviispringweb.modelos.Empleado;
 import org.cplcursos.ejercicioclaseviispringweb.servicios.JardineriaSrvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.LinkedHashMap;
@@ -72,6 +75,27 @@ public class EmpleadoCtrl {
         modelo.addAttribute("cabeceras", cabeceras);
         modelo.addAttribute("filas", filas);
         return "vistaLista";
+    }
+
+
+    @GetMapping("/editar/{id}")
+    public String ediatrEmpleado(Model modelo, @PathVariable int id) {
+        modelo.addAttribute("empleado", jardineriaSrvc.cargarEmpleado(id));
+        return "nuevoEmpleado";
+    }
+
+    @GetMapping("nuevo")
+    public String nuevoEmpleado(Model modelo){
+        // tenemos que devolver el formulario de alta de un nuevo empleado
+        Empleado empleado = new Empleado();
+        modelo.addAttribute("empleado", empleado);
+        return "nuevoEmpleado";
+    }
+
+    @PostMapping("/guardar")
+    public String guardarEmpleado(Model modelo, Empleado empleado) {
+        jardineriaSrvc.grabarEmpleado(empleado);
+        return "redirect:/empleados";
     }
 
     public void mostrarVentasPorEmpleado() {

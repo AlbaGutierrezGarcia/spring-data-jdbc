@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EmpleadoRepo extends CrudRepository<Empleado, Integer>{
@@ -30,4 +31,7 @@ public interface EmpleadoRepo extends CrudRepository<Empleado, Integer>{
 
     List<Empleado> findAll();
 
+    /*@Query("SELECT * FROM empleado WHERE codigo_empleado = :id")
+    Optional<Empleado> findById(@Param("id") int id);*/
+    Optional<Empleado> findById(int id);
 }

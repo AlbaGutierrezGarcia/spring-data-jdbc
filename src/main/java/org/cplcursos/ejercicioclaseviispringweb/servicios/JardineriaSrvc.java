@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JardineriaSrvc {
@@ -33,6 +34,15 @@ public class JardineriaSrvc {
 
     public List<OficinaDTOLista> listarOficinas() {
         return oficinaRepo.listaOficinas();
+    }
+
+    public Empleado cargarEmpleado(int id) {
+        Optional<Empleado> emp = empleadoRepo.findById(id);
+        return emp.get();
+    }
+
+    public void grabarEmpleado(Empleado emp) {
+        empleadoRepo.save(emp);
     }
 
     /*public List<VentasEmpleadoDTO> listarVentasEmpleados() {
