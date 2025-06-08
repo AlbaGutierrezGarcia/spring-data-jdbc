@@ -44,13 +44,9 @@ public class EmpleadoCtrl {
                 }).toList();
 
         List<String> cabeceras = List.of("Código", "Nombre", "Apellidos", "Correo", "Ciudad", "Puesto");
+
         modelo.addAttribute("cabeceras", cabeceras);
         modelo.addAttribute("filas", filas);
-
-        // Procesamos la lista de empleados para rellenar el Map
-        /*Map<String, List<EmpleadoDTOLista>> mapEmpleados = listaEmpleados.stream()
-                .collect(Collectors.groupingBy(EmpleadoDTOLista::getCiudadOficina)
-                );*/
 
         return "vistaLista";
     }
@@ -95,6 +91,7 @@ public class EmpleadoCtrl {
         model.addAttribute("empleado", jardineriaSrvc.cargarEmpleado(id));
         return "form";
     }
+
 
     //Spring guarda automaticamente los campos que le llegan y asigna a la entidad que le pasemos que en este caso seria Empleados
     @PostMapping("/guardar")
