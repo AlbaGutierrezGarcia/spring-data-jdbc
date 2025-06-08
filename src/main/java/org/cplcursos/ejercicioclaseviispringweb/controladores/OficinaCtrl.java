@@ -2,29 +2,29 @@ package org.cplcursos.ejercicioclaseviispringweb.controladores;
 
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.OficinaDTOLista;
 import org.cplcursos.ejercicioclaseviispringweb.modelos.Oficina;
-import org.cplcursos.ejercicioclaseviispringweb.servicios.JardineriaSrvc;
+import org.cplcursos.ejercicioclaseviispringweb.servicios.EmpleadoService;
+import org.cplcursos.ejercicioclaseviispringweb.servicios.OficinaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.*;
 
 @Controller
 @RequestMapping("/oficinas")
 public class OficinaCtrl {
 
-    private final JardineriaSrvc jardineriaSrvc;
 
-    public OficinaCtrl(JardineriaSrvc jardineriaSrvc) {
-        this.jardineriaSrvc = jardineriaSrvc;
+    private final OficinaService oficinaService;
+
+    public OficinaCtrl(OficinaService oficinaService) {
+        this.oficinaService = oficinaService;
     }
 
     @GetMapping({"", "/"})
     public String mostrarListaOficinas(Model modelo) {
-        List<OficinaDTOLista> listaOficinas = jardineriaSrvc.listarOficinas();
+        List<Oficina> listaOficinas = oficinaService.findAllOficinas();
         List<String> cabeceras = List.of("Código", "Ciudad", "Dirección 1", "Dirección 2", "Teléfono");
         // Procesamos la lista de empleados para rellenar el Map
         // Convertimos cada EmpleadoDTO... de la lista a un Map<> Siendo la clave el nombre de la propiedad
@@ -47,17 +47,31 @@ public class OficinaCtrl {
         return "vistaLista";
     }
 
+    //Esto busca una oficina a traves de la {id} que vamos a pasar a traves de la url
+    //esto lo usaremos para poder editar oficinas con el put mas adelante
+    @GetMapping("/editar/{id}")
+    public String editarOficina(Model model, @PathVariable String id) {
+        model.addAttribute("oficina", oficinaService.findOficinaById(id));
+        return "formOfi";
+    }
+
+    @GetMapping("/ver/{id}")
+    public String verCiudadOficina(Model model, @PathVariable String id) {
+        model.addAttribute("oficinaCiudad", oficinaService.findOficinaByCiudad(id));
+        System.out.println("Ciudad encontrada: " + oficinaService.findOficinaByCiudad(id).getCodigoOficina());
+        return "ciudadOficina";
+    }
+
     @GetMapping("/form")
     public String mostrarFormularioOficina(Model model) {
         model.addAttribute("oficina", new Oficina());
         return "formOfi"; // o como se llame tu vista .html
     }
 
-    @PostMapping("/oficinas/guardar")
-    public String guardarOficina(@ModelAttribute Oficina oficina) {
-        //Aqui guardamos en caso de poder
+    @PostMapping("/guardar")
+    public String guardarOficina(@ModelAttribute Oficina oficina) throws SQLException {
+        oficinaService.saveOficina(oficina);
         return "vistaLista"; // Redirige a la lista o donde prefieras
     }
-
 
 }

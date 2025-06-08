@@ -3,7 +3,7 @@ package org.cplcursos.ejercicioclaseviispringweb.controladores;
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOLista;
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOSinCiudad;
 import org.cplcursos.ejercicioclaseviispringweb.modelos.Empleado;
-import org.cplcursos.ejercicioclaseviispringweb.servicios.JardineriaSrvc;
+import org.cplcursos.ejercicioclaseviispringweb.servicios.EmpleadoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +17,15 @@ import java.util.Map;
 @RequestMapping("/empleados")
 public class EmpleadoCtrl {
 
-    private final JardineriaSrvc jardineriaSrvc;
+    private final EmpleadoService empleadoService;
 
-    public EmpleadoCtrl(JardineriaSrvc jardineriaSrvc) {
-        this.jardineriaSrvc = jardineriaSrvc;
+    public EmpleadoCtrl(EmpleadoService empleadoService) {
+        this.empleadoService = empleadoService;
     }
 
     @GetMapping({"", "/"})
     public String mostrarEmpleadosPorOficina(Model modelo) {
-        List<EmpleadoDTOLista> listaEmpleados = jardineriaSrvc.listarEmpleados();
+        List<EmpleadoDTOLista> listaEmpleados = empleadoService.listarEmpleados();
         // Procesamos la lista de empleados para rellenar el Map
         // Convertimos cada EmpleadoDTO... de la lista a un Map<> Siendo la clave el nombre de la propiedad
         // (tipo String) y su valor el valor de dicha propiedad para el EmpleadoDTO... tratado; como no sabemos la clase
@@ -53,7 +53,7 @@ public class EmpleadoCtrl {
 
     @GetMapping("/nociudad")
     public String listarEmpleadosSinCiudad(Model modelo){
-        List<EmpleadoDTOSinCiudad> listaEmpleados = jardineriaSrvc.listarEmpleadoSinCiudad();
+        List<EmpleadoDTOSinCiudad> listaEmpleados = empleadoService.listarEmpleadoSinCiudad();
         List<Map<String, Object>> filas = listaEmpleados.stream()
                 .map(e -> {
                     Map<String, Object> map = new LinkedHashMap<>();
@@ -80,7 +80,7 @@ public class EmpleadoCtrl {
     //Esto nos muestra un empleado completando el formulario
     @GetMapping("/form/nuevo")
     public String cargarEmpleado(Model model) {
-        Empleado empleado = jardineriaSrvc.cargarEmpleado(7);
+        Empleado empleado = empleadoService.cargarEmpleado(7);
         model.addAttribute("empleado", empleado);
         return "form";
     }
@@ -88,7 +88,7 @@ public class EmpleadoCtrl {
     //Lo que tenemos entre corchete sera un valor que recogeremos a traves de la barra url
     @GetMapping("/editar/{id}")
     public String editarEmpleado(Model model, @PathVariable int id) {
-        model.addAttribute("empleado", jardineriaSrvc.cargarEmpleado(id));
+        model.addAttribute("empleado", empleadoService.cargarEmpleado(id));
         return "form";
     }
 
@@ -97,7 +97,7 @@ public class EmpleadoCtrl {
     @PostMapping("/guardar")
     public String guardarEmpleado(@ModelAttribute Empleado empleado) throws SQLException {
         // Aquí llamas a tu servicio para guardar el empleado
-        jardineriaSrvc.guardarEmpleado(empleado);
+        empleadoService.guardarEmpleado(empleado);
 
         return "redirect:/empleados"; // o donde quieras redirigir
     }
