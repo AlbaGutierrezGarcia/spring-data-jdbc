@@ -44,27 +44,6 @@ public class OficinaCtrl {
         modelo.addAttribute("cabeceras", cabeceras);
         modelo.addAttribute("filas", filas);
 
-
-        /*
-        *************** Ejemplo de diferencia de acceso a cada elemento de una colección ****************
-        *                       OJO: ¡NO FORMA PARTE DEL CÓDIGO DEL EJERCICIO!
-        *
-        * En el Array, accedemos mediante el índice, ya que los elementos se van añadiendo uno tras otro.
-        * En el Map se añaden parejas de (clave,valor), por lo que para acceder a cada elemento usamos el nombre de la
-        * clave
-        ArrayList<String> listaNombres = new ArrayList<>();
-        listaNombres.add("Pepe");
-        listaNombres.add("Alba");
-        listaNombres.add("Ana");
-        System.out.println("el nombre del segundo elemento es: " + listaNombres.get(1));
-
-        Map<String, Object> fila = new LinkedHashMap<>();
-        fila.put("codigo_oficina", "MAD-ES");
-        fila.put("ciudad", "Madrid");
-        fila.put("lineaDireccion1","Goya 12");
-        System.out.println("el nombre de la oficina es:" + (String) fila.get("codigo_oficina"));
-        */
-
         return "vistaLista";
     }
 
