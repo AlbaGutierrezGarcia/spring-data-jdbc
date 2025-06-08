@@ -11,6 +11,7 @@ import java.util.List;
 
 @Repository
 public interface EmpleadoRepo extends CrudRepository<Empleado, Integer>{
+
     @Query("""
             SELECT e.codigo_empleado, e.nombre, e.apellido1, e.apellido2,
                    e.email, e.puesto, o.ciudad as ciudad_oficina
@@ -27,6 +28,7 @@ public interface EmpleadoRepo extends CrudRepository<Empleado, Integer>{
             ORDER BY e.apellido1, e.nombre
             """)
     List<EmpleadoDTOSinCiudad> listaEmpleadosSinCiudad();
+
 
     List<Empleado> findAll();
 

@@ -32,26 +32,7 @@ public class JardineriaSrvc {
         return empleadoRepo.listaEmpleadosSinCiudad();
     }
 
-    public List<OficinaDTOLista> listarOficinas() {
-        return oficinaRepo.listaOficinas();
-    }
-
-    /*public List<VentasEmpleadoDTO> listarVentasEmpleados() {
-        return empleadoRepo.findAllVentas();
-    }*/
-
     public List<EmpleadoDTOLista> listarTodos() {
-        /*
-                    OJO Este código está a modo de ejemplo. NO UTILIZAR
-
-            Esta forma de generar la lista de DTOs es muy ineficiente. es lo que conocemos como "efecto N+1"
-            (N+1 issue) cuando accedemos a la BD.
-
-            Hay varias formas de solucionarlo, pero la más eficiente es usar proyecciones, tal como hacemos en el
-            método "findAllDTOs" del repositorio de Empleado.
-
-            Otra forma sería crear una vista en la BD y ejecutar esa vista
-         */
         List<Empleado> empleadosLista = empleadoRepo.findAll();
         // para transformar cada empleado en su DTO, debo hacer una consulta para obtener la ciudad de su oficina
         List<EmpleadoDTOLista> empleadosDTOLista = new ArrayList<>();
@@ -73,4 +54,12 @@ public class JardineriaSrvc {
     public void guardarEmpleado(Empleado empleado) throws SQLException {
         empleadoRepo.save(empleado);
     }
+
+
+
+
+    public List<OficinaDTOLista> listarOficinas() {
+        return oficinaRepo.listaOficinas();
+    }
+
 }
