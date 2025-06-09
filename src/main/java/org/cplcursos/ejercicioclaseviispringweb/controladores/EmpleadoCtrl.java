@@ -2,6 +2,7 @@ package org.cplcursos.ejercicioclaseviispringweb.controladores;
 
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOLista;
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOSinCiudad;
+import org.cplcursos.ejercicioclaseviispringweb.mapeadores.EmpleadoRecordMapper;
 import org.cplcursos.ejercicioclaseviispringweb.modelos.Empleado;
 import org.cplcursos.ejercicioclaseviispringweb.servicios.EmpleadoService;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class EmpleadoCtrl {
 
     @GetMapping({"", "/"})
     public String mostrarEmpleadosPorOficina(Model modelo) {
-        List<EmpleadoDTOLista> listaEmpleados = empleadoService.listarEmpleados();
+        List<EmpleadoRecordMapper> listaEmpleados = empleadoService.listarEmpleados();
         // Procesamos la lista de empleados para rellenar el Map
         // Convertimos cada EmpleadoDTO... de la lista a un Map<> Siendo la clave el nombre de la propiedad
         // (tipo String) y su valor el valor de dicha propiedad para el EmpleadoDTO... tratado; como no sabemos la clase
@@ -44,6 +45,7 @@ public class EmpleadoCtrl {
                 }).toList();
 
         List<String> cabeceras = List.of("Código", "Nombre", "Apellidos", "Correo", "Ciudad", "Puesto");
+
 
         modelo.addAttribute("cabeceras", cabeceras);
         modelo.addAttribute("filas", filas);
