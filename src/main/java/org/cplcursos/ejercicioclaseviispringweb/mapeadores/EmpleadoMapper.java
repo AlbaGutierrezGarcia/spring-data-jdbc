@@ -26,10 +26,33 @@ public class EmpleadoMapper {
     }
 
     public EmpleadoDTOForm toDTOForm(Empleado empleado) throws SQLException {
-        return null;
+        return new EmpleadoDTOForm(
+                empleado.getCodigoEmpleado(),
+                empleado.getNombre(),
+                empleado.getApellido1(),
+                empleado.getApellido2(),
+                empleado.getExtension(),
+                empleado.getEmail(),
+                empleado.getCodigoOficina(),
+                empleado.getCodigoJefe(),
+                empleado.getPuesto());
     }
 
     public Empleado toEntity(EmpleadoDTOForm empDTO) throws SQLException {
-        return null;
+        return new Empleado(
+                empDTO.codigoEmpleado(),
+                empDTO.nombre(),
+                empDTO.apellido1(),
+                empDTO.apellido2(),
+                empDTO.extension(),
+                empDTO.email(),
+                empDTO.codigoOficina(),
+                empDTO.codigoJefe(),
+                empDTO.puesto()
+        );
+    }
+
+    public EmpleadoDTOForm toDTOFormVacio() {
+        return new EmpleadoDTOForm(0, "","","","","","",0,"");
     }
 }

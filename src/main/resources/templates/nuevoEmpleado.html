@@ -31,6 +31,8 @@
 						<h2 th:if="${empleado.codigoEmpleado == 0}">Registrar Nuevo Empleado</h2>
 						<h2 th:unless="${empleado.codigoEmpleado == 0}">Editar Datos del Empleado</h2>
 					</div>
+					<div th:text="${mensaje}">
+					</div>
 					<div class="card-body">
 						<!--
 							El atributo 'novalidate' en el <form> deshabilita las validaciones y mensajes por defecto del navegador.
@@ -47,7 +49,7 @@
 							<!-- Nombre -->
 							<div class="mb-3">
 								<label for="nombre" class="form-label required-field">Nombre</label>
-								<input type="text" class="form-control" id="nombre" name="nombre" required
+								<input type="text" class="form-control" id="nombre" th:field="*{nombre}" required
 								       th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''" placeholder="Ej: Ana">
 								<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="invalid-feedback"></div>
 							</div>

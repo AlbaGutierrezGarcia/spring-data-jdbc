@@ -1,7 +1,7 @@
 package org.cplcursos.ejercicioclaseviispringweb.DTOs;
 
 public record EmpleadoDTOForm(
-        String codigoEmpleado,
+        Integer codigoEmpleado,
         String nombre,
         String apellido1,
         String apellido2,

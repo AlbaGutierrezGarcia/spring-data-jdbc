@@ -1,9 +1,10 @@
 package org.cplcursos.ejercicioclaseviispringweb.controladores;
 
+import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOForm;
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOLista;
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOSinCiudad;
 import org.cplcursos.ejercicioclaseviispringweb.modelos.Empleado;
-import org.cplcursos.ejercicioclaseviispringweb.servicios.JardineriaSrvc;
+import org.cplcursos.ejercicioclaseviispringweb.servicios.EmpleadoSrvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,15 +21,15 @@ import java.util.Map;
 @RequestMapping("/empleados")
 public class EmpleadoCtrl {
 
-    private final JardineriaSrvc jardineriaSrvc;
+    private final EmpleadoSrvc empleadoSrvc;
 
-    public EmpleadoCtrl(JardineriaSrvc jardineriaSrvc) {
-        this.jardineriaSrvc = jardineriaSrvc;
+    public EmpleadoCtrl(EmpleadoSrvc empleadoSrvc) {
+        this.empleadoSrvc = empleadoSrvc;
     }
 
     @GetMapping({"", "/"})
     public String mostrarEmpleadosPorOficina(Model modelo) {
-        List<EmpleadoDTOLista> listaEmpleados = jardineriaSrvc.listarEmpleados();
+        List<EmpleadoDTOLista> listaEmpleados = empleadoSrvc.listarEmpleados();
         // Procesamos la lista de empleados para rellenar el Map
         // Convertimos cada EmpleadoDTO... de la lista a un Map<> Siendo la clave el nombre de la propiedad
         // (tipo String) y su valor el valor de dicha propiedad para el EmpleadoDTO... tratado; como no sabemos la clase
@@ -59,7 +61,7 @@ public class EmpleadoCtrl {
 
     @GetMapping("/nociudad")
     public String listarEmpleadosSinCiudad(Model modelo){
-        List<EmpleadoDTOSinCiudad> listaEmpleados = jardineriaSrvc.listarEmpleadoSinCiudad();
+        List<EmpleadoDTOSinCiudad> listaEmpleados = empleadoSrvc.listarEmpleadoSinCiudad();
         List<Map<String, Object>> filas = listaEmpleados.stream()
                 .map(e -> {
                     Map<String, Object> map = new LinkedHashMap<>();
@@ -79,8 +81,15 @@ public class EmpleadoCtrl {
 
 
     @GetMapping("/editar/{id}")
-    public String ediatrEmpleado(Model modelo, @PathVariable int id) {
-        modelo.addAttribute("empleado", jardineriaSrvc.cargarEmpleado(id));
+    public String ediatrEmpleado(Model modelo, @PathVariable int id) throws SQLException {
+        // Comprobamos si existe el id y, en ese caso, cargamos el empleado. Si no, creamos un DTO vacío
+        EmpleadoDTOForm empDTOForm = empleadoSrvc.cargarEmpleado(id);
+        modelo.addAttribute("empleado", empDTOForm);
+        // Si el DTO está vacío tengo que presentar un mensaje de aviso
+        String mensaje = empDTOForm.codigoEmpleado() == 0
+            ? "El empleado no existe. Puede crear uno nuevo"
+            : "";
+        modelo.addAttribute("mensaje", mensaje);
         return "nuevoEmpleado";
     }
 
@@ -94,7 +103,7 @@ public class EmpleadoCtrl {
 
     @PostMapping("/guardar")
     public String guardarEmpleado(Model modelo, Empleado empleado) {
-        jardineriaSrvc.grabarEmpleado(empleado);
+        empleadoSrvc.grabarEmpleado(empleado);
         return "redirect:/empleados";
     }
 
