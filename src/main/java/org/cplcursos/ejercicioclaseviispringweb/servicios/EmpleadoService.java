@@ -3,7 +3,6 @@ package org.cplcursos.ejercicioclaseviispringweb.servicios;
 
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOLista;
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOSinCiudad;
-import org.cplcursos.ejercicioclaseviispringweb.mapeadores.EmpleadoRecordMapper;
 import org.cplcursos.ejercicioclaseviispringweb.modelos.Empleado;
 import org.cplcursos.ejercicioclaseviispringweb.repositorios.EmpleadoRepo;
 import org.cplcursos.ejercicioclaseviispringweb.repositorios.OficinaRepo;
@@ -21,7 +20,7 @@ public class EmpleadoService {
         this.empleadoRepo = empleadoRepo;
     }
 
-    public List<EmpleadoRecordMapper> listarEmpleados() {
+    public List<EmpleadoDTOLista> listarEmpleados() {
         return empleadoRepo.findAllDtos();
     }
 
