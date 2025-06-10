@@ -85,7 +85,7 @@ public class EmpleadoCtrl {
         return "form";
     }
 
-    //Lo que tenemos entre corchete sera un valor que recogeremos a traves de la barra url
+    //Lo que tenemos entre corchete será un valor que recogeremos a traves de la barra url
     @GetMapping("/editar/{id}")
     public String editarEmpleado(Model model, @PathVariable int id) {
         model.addAttribute("empleado", empleadoService.cargarEmpleado(id));
@@ -93,7 +93,7 @@ public class EmpleadoCtrl {
     }
 
 
-    //Spring guarda automaticamente los campos que le llegan y asigna a la entidad que le pasemos que en este caso seria Empleados
+    //Spring guarda automáticamente los campos que le llegan y asigna a la entidad que le pasemos que en este caso seria Empleados
     @PostMapping("/guardar")
     public String guardarEmpleado(@ModelAttribute Empleado empleado) throws SQLException {
         // Aquí llamas a tu servicio para guardar el empleado
