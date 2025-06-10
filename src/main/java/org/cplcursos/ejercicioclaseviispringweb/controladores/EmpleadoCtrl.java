@@ -40,8 +40,8 @@ public class EmpleadoCtrl {
                     Map<String, Object> map = new LinkedHashMap<>();
                     map.put("codigo_empleado", e.getCodigoEmpleado());
                     map.put("nombre", e.getNombre());
-                    map.put("apellido1", e.getApellido1());
-                    map.put("apellido2", e.getApellido2());
+                    map.put("apellidos", e.getApellidos() );
+                    //map.put("apellido2", e.getApellido2());
                     map.put("email", e.getEmail());
                     map.put("ciudadOficina", e.getCiudadOficina());
                     map.put("puesto", e.getPuesto());
@@ -51,6 +51,8 @@ public class EmpleadoCtrl {
         List<String> cabeceras = List.of("Código", "Nombre", "Apellidos", "Correo", "Ciudad", "Puesto");
         modelo.addAttribute("cabeceras", cabeceras);
         modelo.addAttribute("filas", filas);
+        modelo.addAttribute("urlEdicion","empleados/editar/");
+        modelo.addAttribute("urlBorrado","empleados/borrar/");
 
         // Procesamos la lista de empleados para rellenar el Map
         /*Map<String, List<EmpleadoDTOLista>> mapEmpleados = listaEmpleados.stream()
@@ -116,8 +118,8 @@ public class EmpleadoCtrl {
     private void imprimirEmpleado(EmpleadoDTOLista empleado) {
         System.out.printf("  - %s %s %s (%s) - %s%n",
                 empleado.getNombre(),
-                empleado.getApellido1(),
-                empleado.getApellido2() != null ? empleado.getApellido2() : "",
+                //empleado.getApellido1(),
+                //empleado.getApellido2() != null ? empleado.getApellido2() : "",
                 empleado.getPuesto(),
                 empleado.getEmail());
     }

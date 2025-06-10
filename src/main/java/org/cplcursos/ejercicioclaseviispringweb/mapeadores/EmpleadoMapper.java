@@ -16,8 +16,8 @@ public class EmpleadoMapper {
         EmpleadoDTOLista empleDTO = new EmpleadoDTOLista();
         empleDTO.setCodigoEmpleado(rs.getInt("codigo_empleado"));
         empleDTO.setNombre(rs.getString("nombre"));
-        empleDTO.setApellido1(rs.getString("apellido1"));
-        empleDTO.setApellido2(rs.getString("apellido2"));
+        empleDTO.setApellidos(rs.getString("apellido1") +" " +rs.getString("apellido2"));
+        //empleDTO.setApellido2(rs.getString("apellido2"));
         empleDTO.setEmail(rs.getString("email"));
         empleDTO.setPuesto(rs.getString("puesto"));
         // necesitamos obtener la ciudad de su oficina

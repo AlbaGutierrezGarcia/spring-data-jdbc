@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface EmpleadoRepo extends CrudRepository<Empleado, Integer>{
     @Query("""
-            SELECT e.codigo_empleado, e.nombre, e.apellido1, e.apellido2,
+            SELECT e.codigo_empleado, e.nombre, CONCAT(e.apellido1, ' ' ,e.apellido2) AS apellidos,
                    e.email, e.puesto, o.ciudad as ciudad_oficina
             FROM empleado e
             INNER JOIN oficina o ON e.codigo_oficina = o.codigo_oficina

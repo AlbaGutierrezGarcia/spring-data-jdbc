@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.cplcursos.ejercicioclaseviispringweb.modelos.Empleado;
 
 @Getter
 @Setter
@@ -13,8 +12,7 @@ import org.cplcursos.ejercicioclaseviispringweb.modelos.Empleado;
 public class EmpleadoDTOLista {
     private int codigoEmpleado;
     private String nombre;
-    private String apellido1;
-    private String apellido2;
+    private String apellidos;
     private String email;
     private String ciudadOficina;
     private String puesto;
