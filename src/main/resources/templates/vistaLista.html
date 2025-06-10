@@ -33,6 +33,8 @@
 	
 	</header>
 	<main>
+		<div th:text="${mensaje}">
+		</div>
 		<table>
 			<tr>
 				<th th:each="c : ${cabeceras}" th:text="${c}"></th>

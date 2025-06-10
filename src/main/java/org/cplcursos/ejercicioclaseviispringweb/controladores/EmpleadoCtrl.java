@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
@@ -102,8 +103,9 @@ public class EmpleadoCtrl {
     }
 
     @PostMapping("/guardar")
-    public String guardarEmpleado(Model modelo, Empleado empleado) {
+    public String guardarEmpleado(RedirectAttributes redirAttr, Empleado empleado) {
         empleadoSrvc.grabarEmpleado(empleado);
+        redirAttr.addFlashAttribute("mensaje", "El empleado se ha guardado con éxito.");
         return "redirect:/empleados";
     }
 
