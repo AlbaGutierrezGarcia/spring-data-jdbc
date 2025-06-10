@@ -47,7 +47,7 @@
 							<!-- Nombre -->
 							<div class="mb-3">
 								<label for="nombre" class="form-label required-field">Nombre</label>
-								<input type="text" class="form-control" id="nombre" th:field="*{nombre}" required
+								<input type="text" class="form-control" id="nombre" name="nombre" required
 								       th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''" placeholder="Ej: Ana">
 								<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="invalid-feedback"></div>
 							</div>
