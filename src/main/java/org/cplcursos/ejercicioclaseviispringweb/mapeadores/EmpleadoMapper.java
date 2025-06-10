@@ -1,6 +1,8 @@
 package org.cplcursos.ejercicioclaseviispringweb.mapeadores;
 
+import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOForm;
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOLista;
+import org.cplcursos.ejercicioclaseviispringweb.modelos.Empleado;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
@@ -23,5 +25,11 @@ public class EmpleadoMapper {
         return empleDTO;
     }
 
+    public EmpleadoDTOForm toDTOForm(Empleado empleado) throws SQLException {
+        return null;
+    }
 
+    public Empleado toEntity(EmpleadoDTOForm empDTO) throws SQLException {
+        return null;
+    }
 }
