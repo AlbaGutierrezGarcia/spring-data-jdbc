@@ -2,6 +2,7 @@ package org.cplcursos.ejercicioclaseviispringweb.controladores;
 
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOLista;
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoDTOSinCiudad;
+import org.cplcursos.ejercicioclaseviispringweb.DTOs.EmpleadoFormDTO;
 import org.cplcursos.ejercicioclaseviispringweb.modelos.Empleado;
 import org.cplcursos.ejercicioclaseviispringweb.servicios.EmpleadoService;
 import org.springframework.stereotype.Controller;
@@ -80,7 +81,7 @@ public class EmpleadoCtrl {
     //Esto nos muestra un empleado completando el formulario
     @GetMapping("/form/nuevo")
     public String cargarEmpleado(Model model) {
-        Empleado empleado = empleadoService.cargarEmpleado(7);
+        Empleado empleado = new Empleado();
         model.addAttribute("empleado", empleado);
         return "form";
     }
@@ -88,7 +89,19 @@ public class EmpleadoCtrl {
     //Lo que tenemos entre corchete será un valor que recogeremos a traves de la barra url
     @GetMapping("/editar/{id}")
     public String editarEmpleado(Model model, @PathVariable int id) {
-        model.addAttribute("empleado", empleadoService.cargarEmpleado(id));
+        //Comprobamos si existe el id, si existe cargamos el empleado, si no, cargamos dto vacio
+        EmpleadoFormDTO empleadoFormDTO = empleadoService.cargarEmpleado(id);
+        model.addAttribute("empleado", empleadoFormDTO);
+
+        String msj;
+        if (empleadoFormDTO.codigoEmpleado() == 0)
+        {
+            msj = "Empleado puede ser editado";
+        }else{
+            msj = "El empleado se puede editar";
+        }
+
+
         return "form";
     }
 

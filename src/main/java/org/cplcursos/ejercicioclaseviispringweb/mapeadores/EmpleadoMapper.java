@@ -54,4 +54,9 @@ public class EmpleadoMapper {
         return empleado;
     }
 
+    public EmpleadoFormDTO toDtoEmpty()
+    {
+        return new EmpleadoFormDTO(0,"","","","","","",0,"");
+    }
+
 }
