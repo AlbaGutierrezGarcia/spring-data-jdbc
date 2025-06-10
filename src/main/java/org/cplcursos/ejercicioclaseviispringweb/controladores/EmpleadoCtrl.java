@@ -8,6 +8,7 @@ import org.cplcursos.ejercicioclaseviispringweb.servicios.EmpleadoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
@@ -36,8 +37,7 @@ public class EmpleadoCtrl {
                     Map<String, Object> map = new LinkedHashMap<>();
                     map.put("codigo_empleado", e.getCodigoEmpleado());
                     map.put("nombre", e.getNombre());
-                    map.put("apellido1", e.getApellido1());
-                    map.put("apellido2", e.getApellido2());
+                    map.put("apellidos", e.getApellido1() + " " + e.getApellido2());
                     map.put("email", e.getEmail());
                     map.put("ciudadOficina", e.getCiudadOficina());
                     map.put("puesto", e.getPuesto());
@@ -96,11 +96,14 @@ public class EmpleadoCtrl {
         String msj;
         if (empleadoFormDTO.codigoEmpleado() == 0)
         {
-            msj = "Empleado puede ser editado";
-        }else{
-            msj = "El empleado se puede editar";
+            msj = "NO EXISTE";
+        }
+        else
+        {
+            msj = "";
         }
 
+        model.addAttribute("msj", msj);
 
         return "form";
     }
@@ -108,9 +111,10 @@ public class EmpleadoCtrl {
 
     //Spring guarda automáticamente los campos que le llegan y asigna a la entidad que le pasemos que en este caso seria Empleados
     @PostMapping("/guardar")
-    public String guardarEmpleado(@ModelAttribute Empleado empleado) throws SQLException {
+    public String guardarEmpleado(@ModelAttribute Empleado empleado, RedirectAttributes redirectAttributes) throws SQLException {
         // Aquí llamas a tu servicio para guardar el empleado
         empleadoService.guardarEmpleado(empleado);
+        redirectAttributes.addFlashAttribute("msj", "Empleado guardado con <UNK>xito");
 
         return "redirect:/empleados"; // o donde quieras redirigir
     }
