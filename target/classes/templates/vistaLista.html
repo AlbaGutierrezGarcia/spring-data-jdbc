@@ -33,6 +33,14 @@
 			</tr>
 			<tr th:each="fila : ${filas}">
 				<td th:each="campo : ${fila}" th:text="${campo.value}"></td>
+				<td>
+					<a th:href="${formUrl + fila.get('codigo_empleado')}" class="btn btn-link p-0" title="Editar">
+						<i class="bi bi-pencil-square"></i>
+					</a>
+					<a href="#" class="btn btn-link p-0 ms-2" title="Borrar">
+						<i class="bi bi-trash"></i>
+					</a>
+				</td>
 			</tr>
 		</table>
 	</main>

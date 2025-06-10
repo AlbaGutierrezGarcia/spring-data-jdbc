@@ -48,6 +48,7 @@ public class EmpleadoCtrl {
 
         modelo.addAttribute("cabeceras", cabeceras);
         modelo.addAttribute("filas", filas);
+        modelo.addAttribute("urlForm", "empleados/editar/");
 
         return "vistaLista";
     }
