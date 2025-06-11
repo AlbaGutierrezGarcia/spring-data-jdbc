@@ -112,11 +112,13 @@ public class EmpleadoCtrl {
     }
 
     @GetMapping("/borrar/{id}")
-    public String borrarEmpleado(Model modelo, @PathVariable int id) {
-        // pedir antes confirmacióon del borrado
-
+    public String borrarEmpleado(RedirectAttributes redirAttr, @PathVariable int id) {
         empleadoSrvc.borrarEmpleado(id);
-        return null;
+        // Poner mensaje de borrado exitoso
+        redirAttr.addFlashAttribute("mensaje", "Empleado borrado satisfactoriamente.");
+        redirAttr.addFlashAttribute("clase", "success");
+        // volver a la lista de empleados
+        return "redirect:/empleados";
     }
 
     public void mostrarVentasPorEmpleado() {
