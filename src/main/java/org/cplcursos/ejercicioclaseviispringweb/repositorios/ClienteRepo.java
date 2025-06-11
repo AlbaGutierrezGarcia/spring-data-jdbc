@@ -8,9 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ClienteRepo extends CrudRepository<Cliente, Integer> {
-
     Optional<Cliente> findById(Integer id);
     List<Cliente> findAll();
-
-
 }

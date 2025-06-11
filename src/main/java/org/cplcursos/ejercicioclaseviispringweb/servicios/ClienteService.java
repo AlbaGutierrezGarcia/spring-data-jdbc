@@ -18,7 +18,7 @@ public class ClienteService {
 
     public ClienteService(ClienteRepo clienteRepo, ClienteMapper clienteMapper) {
         this.clienteRepo = clienteRepo;
-        clienteMapper = clienteMapper;
+        this.clienteMapper = clienteMapper;
     }
 
     //CRUD
