@@ -30,7 +30,7 @@ total (suma de ambos);
 12. El IVA se supone fijo al 21%.
 
 ## Hitos (entregables)
-1. Listado de clientes.
+1. Listado de clientes (no son necesarios todos los campos. Usad un conjunto elegido por vosotros).
 2. Listado de gamas.
 3. Listado de pedidos (sin las líneas) incluyendo la base imponible del pedido, la cantidad de IVA y el total.
 4. Formulario de gamas (alta y modificación)
@@ -40,6 +40,8 @@ total (suma de ambos);
 8. Formulario de pedidos incluyendo las líneas. Cada una permitirá (mediante iconos de acción) editar sus datos o 
 ser borrada.
 9. Borrado de pedidos.
+10. Listado de pedidos de un cliente indicado por el usuario
+11. Listado de productos por gama.
 
 ## Recursos
 Para añadir nuevas filas a una tabla HTML de forma dinámica utilizando JavaScript, puedes manipular el 
