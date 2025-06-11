@@ -48,5 +48,10 @@ public class EmpleadoService {
         empleadoRepo.save(empleado);
     }
 
+    public void borrarEmpleado(int id) {
+        Optional<Empleado> empleado = empleadoRepo.findById(id);
+        empleado.ifPresent(empleadoRepo::delete);
+    }
+
 
 }

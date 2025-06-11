@@ -49,6 +49,7 @@ public class EmpleadoCtrl {
         modelo.addAttribute("cabeceras", cabeceras);
         modelo.addAttribute("filas", filas);
         modelo.addAttribute("urlForm", "empleados/editar/");
+        modelo.addAttribute("urlDeleteForm", "empleados/borrar/");
 
         return "vistaLista";
     }
@@ -120,6 +121,13 @@ public class EmpleadoCtrl {
         return "redirect:/empleados"; // o donde quieras redirigir
     }
 
+    @PostMapping("/borrar/{id}")
+    public String borrarEmpleado(@PathVariable int id, RedirectAttributes redirectAttributes) {
+        empleadoService.borrarEmpleado(id);
+
+        redirectAttributes.addFlashAttribute("msj", "Empleado borrado con <UNK>xito");
+        return "redirect:/empleados";
+    }
 
     private void imprimirEmpleado(EmpleadoDTOLista empleado) {
         System.out.printf("  - %s %s %s (%s) - %s%n",
