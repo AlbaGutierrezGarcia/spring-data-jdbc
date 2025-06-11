@@ -22,6 +22,7 @@ public interface EmpleadoRepo extends CrudRepository<Empleado, Integer>{
             """)
     List<EmpleadoDTOLista> findAllDtos();  // <-- ejecuta un "SELECT * FROM empleado"
 
+
     @Query("""
             SELECT e.codigo_empleado, e.nombre, CONCAT(e.apellido1, ' ', e.apellido2) AS apellidos,
                    e.email, e.puesto
@@ -31,9 +32,8 @@ public interface EmpleadoRepo extends CrudRepository<Empleado, Integer>{
     List<EmpleadoDTOSinCiudad> listaEmpleadosSinCiudad();
 
 
+
     List<Empleado> findAll();
-
-
     Optional<Empleado> findById(int id);
 
 }
