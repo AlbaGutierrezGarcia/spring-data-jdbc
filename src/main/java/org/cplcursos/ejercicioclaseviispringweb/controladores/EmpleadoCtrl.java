@@ -111,6 +111,14 @@ public class EmpleadoCtrl {
         return "redirect:/empleados";
     }
 
+    @GetMapping("/borrar/{id}")
+    public String borrarEmpleado(Model modelo, @PathVariable int id) {
+        // pedir antes confirmacióon del borrado
+
+        empleadoSrvc.borrarEmpleado(id);
+        return null;
+    }
+
     public void mostrarVentasPorEmpleado() {
 
     }

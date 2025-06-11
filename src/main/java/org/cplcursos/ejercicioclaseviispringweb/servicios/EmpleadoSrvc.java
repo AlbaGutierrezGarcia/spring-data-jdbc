@@ -44,4 +44,8 @@ public class EmpleadoSrvc {
     public void grabarEmpleado(Empleado emp) {
         empleadoRepo.save(emp);
     }
+
+    public void borrarEmpleado(int id) {
+        empleadoRepo.deleteById(id);
+    }
 }

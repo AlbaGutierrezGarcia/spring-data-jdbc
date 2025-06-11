@@ -8,41 +8,54 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ES-es">
 <head th:replace="~{fragmentos/biblioteca :: head}"></head>
 <body>
-<!--
-       Esta distribución se propone por defecto para facilitar lo expuesto en
-       https://www.youtube.com/watch?v=LQ3_vb8xqqU
-    -->
-<div class="container">
-	<h1>Vista de Lista</h1>
+	<!--
+	       Esta distribución se propone por defecto para facilitar lo expuesto en
+	       https://www.youtube.com/watch?v=LQ3_vb8xqqU
+	    -->
+	<div class="container">
+		<h1>Vista de Lista</h1>
+		
+		<header>
+		
+		</header>
+		<main>
+			<div th:replace="~{fragmentos/biblioteca :: mensajesUsuario}"></div>
+			<table class="table table-striped table-hover table-bordered align-middle">
+				<tr>
+					<th th:each="c : ${cabeceras}" th:text="${c}"></th>
+					<!-- Añadimos la columnas para los iconos de acción -->
+					<th>Acciones</th>
+				</tr>
+				<tr th:each="fila : ${filas}">
+					<td th:each="campo : ${fila}" th:text="${campo.value}"></td>
+					<!-- icono de edición> -->
+					<td><a th:href="${urlEdicion + fila.get('codigo_empleado')}"><i class="bi bi-pencil-square"></i></a></td>
+					<!-- icono de borrado -->
+					<td><a th:href="${urlBorrado + fila.get('codigo_empleado')}"><i class="bi bi-trash"></i></a></td>
+				</tr>
+			</table>
+			
+			<!-- modal de confirmación de borrado -->
+			
+		</main>
+		<footer>
+		
+		</footer>
+	</div>
 	
-	<header>
+	<!-- JavaScript de Bootstrap, */-->
+	<th:block th:replace="~{fragmentos/biblioteca :: scriptsBootstrap}"></th:block>
 	
-	</header>
-	<main>
-		<div th:replace="~{fragmentos/biblioteca :: mensajesUsuario}"></div>
-		<table class="table table-striped table-hover table-bordered align-middle">
-			<tr>
-				<th th:each="c : ${cabeceras}" th:text="${c}"></th>
-				<!-- Añadimos la columnas para los iconos de acción -->
-				<th>Acciones</th>
-			</tr>
-			<tr th:each="fila : ${filas}">
-				<td th:each="campo : ${fila}" th:text="${campo.value}"></td>
-				<!-- icono de edición> -->
-				<td><a th:href="${urlEdicion + fila.get('codigo_empleado')}"><i class="bi bi-pencil-square"></i></a></td>
-				<!-- icono de borrado -->
-				<td><a th:href="${urlBorrado + fila.get('codigo_empleado')}"><i class="bi bi-trash"></i></a></td>
-			</tr>
-		</table>
-	</main>
-	<footer>
+	<th:block th:replace="~{fragmentos/biblioteca :: scriptsVarios}"></th:block>
 	
-	</footer>
-</div>
-
-<!-- JavaScript de Bootstrap, */-->
-<th:block th:replace="~{fragmentos/biblioteca :: scriptsBootstrap}"></th:block>
-
-<th:block th:replace="~{fragmentos/biblioteca :: scriptsVarios}"></th:block>
+	<script th:inline="javascript">
+		/*[- Estas funciones se ejecutan una vez que se carga el contenido. -]*/
+		document.addEventListener('DOMContentLoaded', () => {
+			/* Funciones de inicio propias de la vista */
+			detectarMensajeAlerta();
+		});
+	</script>
+	
+	
 </body>
 </html>
