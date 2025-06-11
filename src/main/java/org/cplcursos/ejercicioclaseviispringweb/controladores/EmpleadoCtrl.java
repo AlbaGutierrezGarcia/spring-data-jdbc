@@ -74,12 +74,6 @@ public class EmpleadoCtrl {
         return "vistaLista";
     }
 
-    @GetMapping("/form")
-    public String mostrarFormulario(Model model) {
-        model.addAttribute("empleado", new Empleado());
-        return "form"; // Ej. "formularioEmpleado"
-    }
-
     //Esto nos muestra un empleado completando el formulario
     @GetMapping("/form/nuevo")
     public String cargarEmpleado(Model model) {

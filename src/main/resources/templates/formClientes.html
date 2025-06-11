@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+          crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"
+          rel="stylesheet">
+
+    <!-- Estilos personalizados -->
+    <link th:href="@{/css/css.css}" rel="stylesheet" type="text/css"/>
+
+    <title>Inicio</title>
+</head>
+<body>
+
+<div class="container my-5">
+    <h1 class="text-center">Bienvenido</h1>
+
+    <header class="mb-4">
+        <!-- Aquí puedes incluir un navbar u otro contenido -->
+    </header>
+
+    <main>
+        <main>
+            <h2 class="text-center mb-4">Formulario de Empleado</h2>
+
+            <form th:action="@{/guardar}" th:object="${cliente}" method="post" class="row g-3">
+
+                <div class="col-12">
+                    <h1 class="text-center" th:text="${msj}"></h1>
+                </div>
+
+                <!-- Mostrar el código solo si ya existe (editar), y como readonly -->
+                <div class="col-md-4" th:if="${cliente.codigo_cliente != null}">
+                    <label for="codigo_cliente" class="form-label">Código</label>
+                    <input type="number" class="form-control" id="codigo_cliente" th:field="*{codigo_cliente}" readonly>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" th:field="*{nombre_cliente}" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="nombre_contacto" class="form-label">Nombre Contacto</label>
+                    <input type="text" class="form-control" id="nombre_contacto" th:field="*{nombre_contacto}" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" id="telefono" th:field="*{telefono}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="direccion" class="form-label">Direccion</label>
+                    <input type="text" class="form-control" id="direccion" th:field="*{linea_direccion1}" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="email" class="form-label">Ciudad</label>
+                    <input type="email" class="form-control" id="email" th:field="*{ciudad}" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="listaRepre" class="form-label">Lista Representantes</label>
+                    <p th:if="${editar}" th:text="${cliente.codigo_empleado_rep_ventas()}"></p>
+                    <select th:if="${!editar}" class="form-select" id="listaRepre" name="listaRepre" th:field="${listaRepresentantes}" aria-required="true">
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option th:each="representante : ${listaRepresentantes}"
+                                th:value="${representante.codigo_empleado}"
+                                th:if="${editar}" th:text="${representante.nombre + ' ' + representante.apellidos}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="limiteCredito" class="form-label">Limite credito</label>
+                    <input type="number" class="form-control" id="limiteCredito" th:field="*{limite_credito}">
+                </div>
+
+                <div class="col-12 text-center mt-3">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+
+            </form>
+        </main>
+    </main>
+
+    <footer class="mt-4 text-center text-muted">
+        <hr>
+        <p>&copy; Template</p>
+    </footer>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

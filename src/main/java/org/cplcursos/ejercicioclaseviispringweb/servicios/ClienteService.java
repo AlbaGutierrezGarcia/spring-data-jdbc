@@ -1,6 +1,7 @@
 package org.cplcursos.ejercicioclaseviispringweb.servicios;
 
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.ClienteDTO;
+import org.cplcursos.ejercicioclaseviispringweb.DTOs.RepVenDTO;
 import org.cplcursos.ejercicioclaseviispringweb.mapeadores.ClienteMapper;
 import org.cplcursos.ejercicioclaseviispringweb.modelos.Cliente;
 import org.cplcursos.ejercicioclaseviispringweb.repositorios.ClienteRepo;
@@ -55,4 +56,11 @@ public class ClienteService {
         clienteRepo.deleteById(codigo_cliente);
     }
 
+
+    public List<RepVenDTO> findClienteRepVenDTO() {
+        List<RepVenDTO> clienteRepVen = clienteRepo.findAllDtosRepVentas();
+        return clienteRepVen;
+    }
+
 }
+
