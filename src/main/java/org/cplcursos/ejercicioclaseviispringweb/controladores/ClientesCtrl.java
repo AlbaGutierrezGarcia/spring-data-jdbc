@@ -48,8 +48,7 @@ public class ClientesCtrl {
     }
 
     @GetMapping("/form/editar/{id}")
-    public String editarCliente(Model model, @PathVariable Integer id)
-    {
+    public String editarCliente(Model model, @PathVariable Integer id) {
         ClienteDTO clienteDTO1 = clienteService.findClienteById(id);
         boolean editar = true;
 
@@ -69,6 +68,9 @@ public class ClientesCtrl {
             msj = "";
         }
 
+        model.addAttribute("cliente", clienteDTO1);
+        model.addAttribute("listaRepresentantes", listaRepresentantes);
+        model.addAttribute("editar", true);
         model.addAttribute("msj", msj);
 
         return "formClientes";

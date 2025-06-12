@@ -1,5 +1,6 @@
 package org.cplcursos.ejercicioclaseviispringweb.servicios;
 
+import org.cplcursos.ejercicioclaseviispringweb.DTOs.PedidosDTO;
 import org.cplcursos.ejercicioclaseviispringweb.modelos.Pedido;
 import org.cplcursos.ejercicioclaseviispringweb.repositorios.PedidoRepo;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,10 @@ public class PedidoService {
 
     public PedidoService(PedidoRepo pedidoRepo) {
         this.pedidoRepo = pedidoRepo;
+    }
+
+    public List<PedidosDTO> findAllPedidosDTO(){
+        return pedidoRepo.findAllPedidosDTOS();
     }
 
     public Pedido findPedidobyId(Integer codigo_pedido) {
