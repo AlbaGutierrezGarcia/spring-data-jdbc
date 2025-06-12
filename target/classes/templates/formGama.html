@@ -32,16 +32,16 @@
     <main>
       <h2 class="text-center mb-4">Formulario de Empleado</h2>
 
-      <form th:action="@{/guardar}" th:object="${gama}" method="post" class="row g-3">
+      <form th:action="@{/gamas/guardar}" th:object="${gama}" method="post" class="row g-3">
 
         <div class="col-12">
           <h1 class="text-center" th:text="${msj}"></h1>
         </div>
 
         <!-- Mostrar el código solo si ya existe (editar), y como readonly -->
-        <div class="col-md-4" th:if="${gama.patata!= null}">
+        <div class="col-md-4">
           <label for="gama" class="form-label">Código</label>
-          <input type="number" class="form-control" id="gama" th:field="*{patata}" readonly>
+          <input type="text" class="form-control" id="gama" th:field="*{patata}" required>
         </div>
 
         <div class="col-md-4">

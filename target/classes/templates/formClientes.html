@@ -33,7 +33,7 @@
         <main>
             <h2 class="text-center mb-4">Formulario de Empleado</h2>
 
-            <form th:action="@{/guardar}" th:object="${cliente}" method="post" class="row g-3">
+            <form th:action="@{/clientes/guardar}" th:object="${cliente}" method="post" class="row g-3">
 
                 <div class="col-12">
                     <h1 class="text-center" th:text="${msj}"></h1>
@@ -65,8 +65,8 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label for="email" class="form-label">Ciudad</label>
-                    <input type="email" class="form-control" id="email" th:field="*{ciudad}" required>
+                    <label for="ciudad" class="form-label">Ciudad</label>
+                    <input type="text" class="form-control" id="ciudad" th:field="*{ciudad}" required>
                 </div>
 
                 <div class="col-md-4">
@@ -82,8 +82,8 @@
                     </select>
 
                     <!-- INPUT si estás en modo edición -->
-                    <input th:if="${editar}" type="text" class="form-control"
-                           th:value="${cliente.codigo_empleado_rep_ventas}"/>
+                    <input th:if="${editar}" type="number" class="form-control"
+                           th:field="*{codigo_empleado_rep_ventas}" required/>
                 </div>
 
                 <div class="col-md-4">

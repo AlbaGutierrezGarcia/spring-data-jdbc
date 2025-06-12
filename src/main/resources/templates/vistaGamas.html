@@ -31,6 +31,10 @@
 
     <main>
 
+        <div class="col-12">
+            <h1 class="text-center" th:text="${msj}"></h1>
+        </div>
+
         <table class="table table-striped table-hover table-bordered align-middle">
             <tr>
                 <th th:each="c : ${cab}" th:text="${c}"></th>
@@ -42,7 +46,15 @@
                 <td th:text="${g.descripcion_texto}"></td>
                 <td th:text="${g.descripcion_html}"></td>
                 <td th:text="${g.imagen}"></td>
+                <td>
+                    <a th:href="@{'/gamas/borrar/' + ${g.patata}}"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('¿Estás seguro de que deseas borrar este cliente?');">
+                        Borrar
+                    </a>
+                </td>
             </tr>
+
         </table>
     </main>
 

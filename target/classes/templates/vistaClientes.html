@@ -51,11 +51,16 @@
                 <td th:text="${c.codigo_empleado_rep_ventas}"></td>
                 <td th:text="${c.limite_credito}"></td>
                 <td>
-                    <a th:href="@{'/clientes/borrar/' + ${c.codigo_cliente}}"
-                       class="btn btn-danger btn-sm"
-                       onclick="return confirm('¿Estás seguro de que deseas borrar este cliente?');">
-                        Borrar
+                    <a th:href="${urlForm + c.codigo_cliente}" class="btn btn-link p-0" title="Editar">
+                        <i class="bi bi-pencil-square"></i>
                     </a>
+                    <form th:action="@{'/clientes/borrar/' + ${c.codigo_cliente}}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-link p-0 ms-2"
+                                onclick="return confirm('¿Estás seguro de que deseas borrar este cliente?');"
+                                title="Borrar">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
         </table>

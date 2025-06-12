@@ -31,6 +31,7 @@ public class ClientesCtrl {
 
         model.addAttribute("cab",cabeceras);
         model.addAttribute("clientes", listaClientes);
+        model.addAttribute("urlForm", "clientes/form/editar/");
 
 
         return "vistaClientes";
@@ -44,19 +45,13 @@ public class ClientesCtrl {
 
         model.addAttribute("cliente", cliente);
         model.addAttribute("listaRepresentantes", listaRepresentantes);
+        model.addAttribute("editar", false);
         return "formClientes";
     }
 
     @GetMapping("/form/editar/{id}")
     public String editarCliente(Model model, @PathVariable Integer id) {
         ClienteDTO clienteDTO1 = clienteService.findClienteById(id);
-        boolean editar = true;
-
-        List<RepVenDTO> listaRepresentantes = clienteService.findClienteRepVenDTO();
-
-        model.addAttribute("cliente", clienteDTO1);
-        model.addAttribute("listaRepresentantes", listaRepresentantes);
-        model.addAttribute("editar", editar);
 
         String msj;
         if (clienteDTO1.codigo_cliente() == 0)
@@ -67,6 +62,8 @@ public class ClientesCtrl {
         {
             msj = "";
         }
+
+        List<RepVenDTO> listaRepresentantes = clienteService.findClienteRepVenDTO();
 
         model.addAttribute("cliente", clienteDTO1);
         model.addAttribute("listaRepresentantes", listaRepresentantes);
@@ -79,6 +76,8 @@ public class ClientesCtrl {
     @PostMapping("/guardar")
     public String guardarCliente(@ModelAttribute Cliente cliente, RedirectAttributes redirectAttributes) throws SQLException {
         clienteService.save(cliente);
+        System.out.println(cliente.getCiudad());
+        System.out.println(cliente.getCodigo_empleado_rep_ventas());
         redirectAttributes.addFlashAttribute("msj", "Cliente guardado con éxito :) ");
         return "redirect:/clientes";
     }
