@@ -82,9 +82,14 @@ public class ClientesCtrl {
     }
 
 
-    @PostMapping
-    public String borrarCliente(ClienteDTO cliente) {
-        return null;
+    @PostMapping("/borrar/{id}")
+    public String borrarCliente(@PathVariable Integer id, RedirectAttributes redirectAttributes) throws SQLException {
+        ClienteDTO clienteDTO = clienteService.findClienteById(id);
+        clienteService.delete(clienteDTO.codigo_cliente());
+
+        redirectAttributes.addFlashAttribute("msj", "Cliente borrado con éxito :) ");
+
+        return "redirect:/clientes";
     }
 
 

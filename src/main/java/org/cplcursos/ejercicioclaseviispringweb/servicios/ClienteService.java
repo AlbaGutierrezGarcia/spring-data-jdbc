@@ -56,11 +56,12 @@ public class ClienteService {
         clienteRepo.deleteById(codigo_cliente);
     }
 
-
     public List<RepVenDTO> findClienteRepVenDTO() {
         List<RepVenDTO> clienteRepVen = clienteRepo.findAllDtosRepVentas();
         return clienteRepVen;
     }
+
+
 
 }
 
