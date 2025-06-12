@@ -19,6 +19,8 @@ public class ClientesCtrl {
 
     private final ClienteService clienteService;
 
+    public String test;
+
     public ClientesCtrl(ClienteService clienteService) {
         this.clienteService = clienteService;
     }
