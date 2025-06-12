@@ -72,11 +72,11 @@
                 <div class="col-md-4">
                     <label for="listaRepre" class="form-label">Lista Representantes</label>
                     <p th:if="${editar}" th:text="${cliente.codigo_empleado_rep_ventas()}"></p>
-                    <select class="form-select" id="listaRepre" name="listaRepre" th:field="${listaRepresentantes}" aria-required="true">
+                    <select th:if="${!editar}" class="form-select" id="listaRepre" name="listaRepre" th:field="${listaRepresentantes}" aria-required="true">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option th:each="representante : ${listaRepresentantes}"
                                 th:value="${representante.codigo_empleado}"
-                                th:text="${representante.nombre + ' ' + representante.apellidos}">
+                                th:if="${editar}" th:text="${representante.nombre + ' ' + representante.apellidos}">
                         </option>
                     </select>
                 </div>

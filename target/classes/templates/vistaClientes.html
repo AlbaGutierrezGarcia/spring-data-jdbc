@@ -31,10 +31,15 @@
 
     <main>
 
+        <div class="col-12">
+            <h1 class="text-center" th:text="${msj}"></h1>
+        </div>
+
         <table class="table table-striped table-hover table-bordered align-middle">
             <tr>
                 <th th:each="c : ${cab}" th:text="${c}"></th>
                 <th>Acciones</th>
+
             </tr>
             <tr th:each="c : ${clientes}">
                 <td th:text= "${c.codigo_cliente}"></td>
@@ -45,6 +50,13 @@
                 <td th:text="${c.ciudad}"></td>
                 <td th:text="${c.codigo_empleado_rep_ventas}"></td>
                 <td th:text="${c.limite_credito}"></td>
+                <td>
+                    <a th:href="@{'/clientes/borrar/' + ${c.codigo_cliente}}"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('¿Estás seguro de que deseas borrar este cliente?');">
+                        Borrar
+                    </a>
+                </td>
             </tr>
         </table>
     </main>

@@ -31,7 +31,6 @@
 						<i class="bi bi-pencil-square"></i>
 					</a>
 					<form th:action="@{'/empleados/borrar/' + ${fila.get('codigo_empleado')}}" method="post" style="display:inline;">
-						<input type="hidden" name="_method" value="delete"/>
 						<button type="submit" class="btn btn-link p-0 ms-2"
 								onclick="return confirm('¿Estás seguro de que deseas borrar este empleado?');"
 								title="Borrar">

@@ -82,7 +82,7 @@ public class ClientesCtrl {
     }
 
 
-    @PostMapping("/borrar/{id}")
+    @GetMapping("/borrar/{id}")
     public String borrarCliente(@PathVariable Integer id, RedirectAttributes redirectAttributes) throws SQLException {
         ClienteDTO clienteDTO = clienteService.findClienteById(id);
         clienteService.delete(clienteDTO.codigo_cliente());
