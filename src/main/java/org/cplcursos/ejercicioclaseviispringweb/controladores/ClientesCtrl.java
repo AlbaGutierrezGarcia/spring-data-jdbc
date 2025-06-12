@@ -20,6 +20,8 @@ public class ClientesCtrl {
     private final ClienteService clienteService;
 
     public String test;
+    public String test2;
+    public String test3;
 
     public ClientesCtrl(ClienteService clienteService) {
         this.clienteService = clienteService;
