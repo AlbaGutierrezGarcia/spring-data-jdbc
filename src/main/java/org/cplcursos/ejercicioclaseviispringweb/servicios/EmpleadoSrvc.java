@@ -21,7 +21,7 @@ public class EmpleadoSrvc {
         this.empleadoMapper = empleadoMapper;
     }
 
-    public List<EmpleadoDTOLista> listarEmpleados() {
+    public List<EmpleadoDTOLista> listarTodos() {
         return empleadoRepo.findAllDtos();
     }
 

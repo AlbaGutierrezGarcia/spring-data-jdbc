@@ -30,7 +30,7 @@ public class EmpleadoCtrl {
 
     @GetMapping({"", "/"})
     public String mostrarEmpleadosPorOficina(Model modelo) {
-        List<EmpleadoDTOLista> listaEmpleados = empleadoSrvc.listarEmpleados();
+        List<EmpleadoDTOLista> listaEmpleados = empleadoSrvc.listarTodos();
         // Procesamos la lista de empleados para rellenar el Map
         // Convertimos cada EmpleadoDTO... de la lista a un Map<> Siendo la clave el nombre de la propiedad
         // (tipo String) y su valor el valor de dicha propiedad para el EmpleadoDTO... tratado; como no sabemos la clase

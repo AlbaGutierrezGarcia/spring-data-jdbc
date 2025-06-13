@@ -29,7 +29,7 @@
 				<tr th:each="fila : ${filas}">
 					<td th:each="campo : ${fila}" th:text="${campo.value}"></td>
 					<!-- icono de edición> -->
-					<td><a th:href="${urlEdicion + fila.get('codigo_empleado')}"><i class="bi bi-pencil-square"></i></a></td>
+					<td><a th:href="'/edicion/' + ${fila.get('id')}"><i class="bi bi-pencil-square"></i></a></td>
 					<!-- icono de borrado -->
 					<td>
 						<a data-bs-toggle="modal" data-bs-target="#modalBorrado"
